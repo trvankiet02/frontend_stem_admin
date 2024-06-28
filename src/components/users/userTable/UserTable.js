@@ -11,6 +11,7 @@ import {
   InfoCircleOutlined,
   RetweetOutlined,
 } from '@ant-design/icons'
+import ACCESS_TOKEN from '../../../api/Api'
 
 const UserTable = () => {
   const [data, setData] = useState([])
@@ -22,7 +23,6 @@ const UserTable = () => {
   })
   const [isModalVisible, setIsModalVisible] = useState(false)
   const [editingUser, setEditingUser] = useState(null)
-  const [resettingPassword, setResettingPassword] = useState(false) // State for resetting password button loading
 
   const [form] = Form.useForm()
   const location = useLocation()
@@ -35,8 +35,7 @@ const UserTable = () => {
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization:
-              'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiIxMmQ3MzIyNy1jOWQ2LTRmYWItYjdiZS1mY2RlYzg2NzBiMDciLCJpYXQiOjE3MTk1NjM1NzgsImV4cCI6MTcxOTU2NzE3OH0.8NXPXcnbYKIQ48ok4te70un1V6VO5VTiVO6OZdSoKXoL2MmZ0aGCsLth5hS42lsYEgJtOYA6NH2posM-E6d8Yw',
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
           },
           params: {
             size: pagination.pageSize,
@@ -80,15 +79,13 @@ const UserTable = () => {
 
   const handleResetPassword = async (userId) => {
     try {
-      setResettingPassword(true) // Set button loading
       const response = await axios.post(
         `http://localhost:9000/api/v1/users/admin/reset-password`,
         { userId },
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization:
-              'Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiQURNSU4iLCJzdWIiOiIxMmQ3MzIyNy1jOWQ2LTRmYWItYjdiZS1mY2RlYzg2NzBiMDciLCJpYXQiOjE3MTk1NTk5MjMsImV4cCI6MTcxOTU2MzUyM30.9GvYI--VkLIp7OvFFhuqljCmu93R7UDT_tf0WQHBk5OH1LmjRjp2PF1adtNrpS92YW8bC6vl901Xx4ioOkViBQ',
+            Authorization: `Bearer ${ACCESS_TOKEN}`,
           },
         }
       )
@@ -97,8 +94,6 @@ const UserTable = () => {
     } catch (error) {
       console.error('Error resetting password:', error)
       message.error('Đã xảy ra lỗi khi tạo mật khẩu mới!')
-    } finally {
-      setResettingPassword(false) // Clear button loading
     }
   }
 

@@ -4,16 +4,15 @@ import { LIGHT_THEME } from '../../constants/themeConstants'
 import LogoBlue from '../../assets/images/logo_blue.svg'
 import LogoWhite from '../../assets/images/logo_white.svg'
 import {
-  MdOutlineAttachMoney,
-  MdOutlineBarChart,
+  MdOutlinePermIdentity,
   MdOutlineClose,
-  MdOutlineCurrencyExchange,
   MdOutlineGridView,
   MdOutlineLogout,
-  MdOutlineMessage,
-  MdOutlinePeople,
+  MdSynagogue,
   MdOutlineSettings,
-  MdOutlineShoppingBag,
+  MdGroups3,
+  MdPeopleOutline,
+  MdOutlineReportGmailerrorred,
 } from 'react-icons/md'
 import { Link, useLocation } from 'react-router-dom'
 import './Sidebar.scss'
@@ -49,14 +48,40 @@ const Sidebar = () => {
     {
       title: 'Quản lý người dùng',
       ref: '/users',
-      icon: <MdOutlinePeople size={20} />,
+      icon: <MdOutlinePermIdentity size={20} />,
     },
     {
       title: 'Quản lý nhóm',
       ref: '/groups',
-      icon: <GoldOutlined size={20} />,
+      icon: <MdGroups3 size={20} />,
+    },
+    {
+      title: 'Quản lý lớp',
+      ref: '/classes',
+      icon: <MdSynagogue size={20} />,
+    },
+    {
+      title: 'Quản lý thành viên',
+      ref: '/group-members/:uuid',
+      icon: <MdPeopleOutline size={20} />,
+    },
+    {
+      title: 'Quản lý vi phạm',
+      ref: '/reports',
+      icon: <MdOutlineReportGmailerrorred size={20} />,
     },
   ]
+
+  const isActive = (ref) => {
+    if (location.pathname === ref) return true
+    if (
+      ref === '/group-members/:uuid' &&
+      location.pathname.startsWith('/group-members/')
+    ) {
+      return true
+    }
+    return false
+  }
 
   return (
     <nav
@@ -82,7 +107,7 @@ const Sidebar = () => {
                     <Link
                       to={sidebarOption.ref}
                       className={`menu-link ${
-                        location.pathname === sidebarOption.ref ? 'active' : ''
+                        isActive(sidebarOption.ref) ? 'active' : ''
                       }`}
                     >
                       <span className="menu-link-icon">
