@@ -21,7 +21,7 @@ import {
   RetweetOutlined,
   DeleteOutlined,
 } from '@ant-design/icons'
-import { MdGroups3 } from 'react-icons/md'
+import { MdSynagogue } from 'react-icons/md'
 
 import ACCESS_TOKEN from '../../../api/Api'
 
@@ -48,7 +48,7 @@ const GroupTable = () => {
     setLoading(true)
     try {
       const response = await axios.get(
-        'http://localhost:9000/api/v1/groups/admin/get-all-groups',
+        'http://localhost:9000/api/v1/groups/admin/get-all-classes',
         {
           headers: {
             'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ const GroupTable = () => {
   const fetchUsers = async () => {
     try {
       const response = await axios.get(
-        'http://localhost:9000/api/v1/users/admin',
+        'http://localhost:9000/api/v1/users/admin/get-teachers',
         {
           headers: {
             'Content-Type': 'application/json',
@@ -129,9 +129,9 @@ const GroupTable = () => {
         isAcceptAllRequest: values.isAcceptAllRequest === 'true',
       }
       await axios.put(
-        `http://localhost:9000/api/v1/groups/admin/update-group`,
+        `http://localhost:9000/api/v1/groups/admin/update-class`,
         {
-          groupId: editingGroup.id,
+          classId: editingGroup.id,
           ...transformedValues,
         },
         {
@@ -180,7 +180,7 @@ const GroupTable = () => {
         isAcceptAllRequest: values.isAcceptAllRequest === 'true',
       }
       await axios.post(
-        `http://localhost:9000/api/v1/groups/admin/create-group`,
+        `http://localhost:9000/api/v1/groups/admin/create-class`,
         transformedValues,
         {
           headers: {
@@ -204,11 +204,11 @@ const GroupTable = () => {
     <>
       <Button
         type="primary"
-        icon={<MdGroups3 />}
+        icon={<MdSynagogue />}
         style={{ marginBottom: 16 }}
         onClick={() => setIsCreateModalVisible(true)}
       >
-        Tạo nhóm mới
+        Tạo lớp mới
       </Button>
       <Table
         columns={[
@@ -217,10 +217,12 @@ const GroupTable = () => {
             render: (text, record, index) =>
               (pagination.current - 1) * pagination.pageSize + index + 1,
           },
-          { title: 'Tên nhóm', dataIndex: 'name', key: 'name' },
+          { title: 'Tên lớp', dataIndex: 'name', key: 'name' },
           { title: 'Mô tả', dataIndex: 'description', key: 'description' },
+          { title: 'Môn học', dataIndex: 'subject', key: 'subject' },
+          { title: 'Lớp', dataIndex: 'grade', key: 'grade' },
           {
-            title: 'Chủ sở hữu',
+            title: 'Giáo viên sỡ hữu',
             render: (text, record) =>
               `${record?.author.lastName} ${record?.author.firstName}`,
           },
@@ -308,6 +310,16 @@ const GroupTable = () => {
               <Option value="false">Cần xác thực</Option>
             </Select>
           </Form.Item>
+          <Form.Item name="grade" label="Lớp">
+            <Select placeholder="Chọn lớp">
+              {Array.from({ length: 12 }, (_, i) => i + 1).map((i) => (
+                <Option value={i}>{i}</Option>
+              ))}
+            </Select>
+          </Form.Item>
+          <Form.Item name="subject" label="Môn học">
+            <Input placeholder="Môn học" />
+          </Form.Item>
         </Form>
       </Modal>
       <Modal
@@ -364,6 +376,16 @@ const GroupTable = () => {
                 </Option>
               ))}
             </Select>
+          </Form.Item>
+          <Form.Item name="grade" label="Lớp">
+            <Select placeholder="Chọn lớp">
+              {Array.from({ length: 12 }, (_, i) => i + 1).map((i) => (
+                <Option value={i}>{i}</Option>
+              ))}
+            </Select>
+          </Form.Item>
+          <Form.Item name="subject" label="Môn học">
+            <Input placeholder="Môn học" />
           </Form.Item>
         </Form>
       </Modal>
