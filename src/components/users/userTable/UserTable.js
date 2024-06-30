@@ -11,9 +11,10 @@ import {
   InfoCircleOutlined,
   RetweetOutlined,
 } from '@ant-design/icons'
-import ACCESS_TOKEN from '../../../api/Api'
+import useApi from '../../../api/Api';
 
 const UserTable = () => {
+  const Api = useApi()
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
   const [pagination, setPagination] = useState({
@@ -27,16 +28,17 @@ const UserTable = () => {
   const [form] = Form.useForm()
   const location = useLocation()
 
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+  }
   const fetchData = async (params = {}) => {
     setLoading(true)
     try {
-      const response = await axios.get(
+      const response = await Api.get(
         'http://localhost:9000/api/v1/users/admin/get-all-users',
         {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${ACCESS_TOKEN}`,
-          },
+          headers,
           params: {
             size: pagination.pageSize,
             page: pagination.current,
@@ -79,14 +81,11 @@ const UserTable = () => {
 
   const handleResetPassword = async (userId) => {
     try {
-      const response = await axios.post(
+      const response = await Api.post(
         `http://localhost:9000/api/v1/users/admin/reset-password`,
         { userId },
         {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${ACCESS_TOKEN}`,
-          },
+          headers,
         }
       )
       console.log('Reset password response:', response)

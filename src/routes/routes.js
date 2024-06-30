@@ -5,6 +5,7 @@ import Groups from '../components/groups/Groups'
 import GroupMembers from '../components/groupMemers/GroupMembers'
 import Classes from '../components/classes/Classes'
 import Reports from '../components/reports/Reports'
+import Login from '../components/login/Login'
 
 const privateRoutes = [
   { path: '/', element: <DashBoard /> },
@@ -15,5 +16,5 @@ const privateRoutes = [
   { path: '/group-members/:uuid', element: <GroupMembers /> },
   { path: '/reports', element: <Reports /> },
 ]
-
-export { privateRoutes }
+const authRoutes = [{ path: '/login', element: <Login /> }]
+export { privateRoutes, authRoutes}

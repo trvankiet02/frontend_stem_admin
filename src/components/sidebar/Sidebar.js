@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from 'react'
+import { useContext, useEffect, useRef, useNa } from 'react'
 import { ThemeContext } from '../../context/ThemeContext'
 import { LIGHT_THEME } from '../../constants/themeConstants'
 import LogoBlue from '../../assets/images/logo_blue.svg'
@@ -14,17 +14,18 @@ import {
   MdPeopleOutline,
   MdOutlineReportGmailerrorred,
 } from 'react-icons/md'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation,useNavigate } from 'react-router-dom'
 import './Sidebar.scss'
 import { SidebarContext } from '../../context/SidebarContext'
 import { GoldOutlined } from '@ant-design/icons'
+
 
 const Sidebar = () => {
   const { theme } = useContext(ThemeContext)
   const { isSidebarOpen, closeSidebar } = useContext(SidebarContext)
   const location = useLocation()
   const navbarRef = useRef(null)
-
+  const navigate = useNavigate()
   // closing the navbar when clicked outside the sidebar area
   const handleClickOutside = (event) => {
     if (
@@ -81,6 +82,11 @@ const Sidebar = () => {
       return true
     }
     return false
+  }
+  const LogOut = () => {
+    localStorage.clear();
+    navigate('/login');
+
   }
 
   return (
@@ -190,8 +196,8 @@ const Sidebar = () => {
                 <span className="menu-link-text">Settings</span>
               </Link>
             </li>
-            <li className="menu-item">
-              <Link to="/" className="menu-link">
+            <li className="menu-item" onClick={()=>LogOut()}>
+              <Link className="menu-link" >
                 <span className="menu-link-icon">
                   <MdOutlineLogout size={20} />
                 </span>

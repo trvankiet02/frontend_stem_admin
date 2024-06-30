@@ -1,0 +1,147 @@
+.login-page{
+    width: 100%;
+   height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+ .login-container {
+   margin: 0;
+   width: 74%;
+   padding: 16px;
+   width: 100%;
+   border-radius: 12px;
+   background-color: #f8f8f8;
+   border: 3px solid #007bff;
+   display: flex;
+   padding: 1rem 1rem 2rem 1rem;
+ 
+ 
+ }
+ 
+ .body-login {
+   background-color: #f8f8f8;
+   height: auto;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 50%;
+   border-radius: 12px;
+ }
+ 
+ h2 {
+ 
+   text-align: center;
+ }
+ 
+ label {
+   display: block;
+   margin-bottom: 5px;
+ }
+ 
+ input {
+   width: 93%;
+   padding: 10px;
+   margin-bottom: 10px;
+   border: 1px solid #ccc;
+   border-radius: 3px;
+ }
+ 
+ 
+ .login-form-button{
+   height: 45px;
+ }
+ button {
+   background-color: #007bff;
+   color: #fff;  
+   border: none;
+   padding: 5px;
+   border-radius: 3px;
+   cursor: pointer;
+   text-align: center;
+   max-width: 100%;
+   flex: auto;
+   height: 50px;
+ }
+ 
+ button:hover {
+   background-color: #0056b3;
+ }
+ 
+ #components-form-demo-normal-login .login-form {
+   max-width: 300px;
+ }
+ 
+ #components-form-demo-normal-login .login-form-forgot {
+   float: right;
+ }
+ 
+ #components-form-demo-normal-login .ant-col-rtl .login-form-forgot {
+   float: left;
+ }
+ 
+ #components-form-demo-normal-login .login-form-button {
+   width: 100%;
+ }
+ .Loading-login {
+   position: absolute;
+   top: 50vh;
+   left: 50vw;
+   transform: translate(-50%, -50%); 
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.5);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   z-index: 999; /* Đảm bảo form nằm trên cả nội dung khác */
+ }
+ 
+ .ant-form-item .ant-form-item-label {
+   text-align: start;
+ }
+ 
+ .logo{
+   width: 100%;
+   height: auto;
+   padding-top: 71px;
+ }
+ 
+ .login-content{
+   width: 75%
+ }
+ @media screen and (max-width: 768px)
+ {
+   .body-login {
+     width: 95%;
+   }
+ 
+   .login-page{
+     display: block;
+     margin-top: 1rem;
+     margin-left: 3%;
+   }
+   .login-container {
+     display: block;
+     padding-bottom: 1rem;
+   }
+   .logo{
+     padding-top: 0px;
+   }
+   .login-logo{
+     margin-left: 15%;
+   }
+   .login-content{
+     width: 100%;
+   }
+   .login-content h2{
+     margin-top:0 ;
+   }
+   .login-footer br{
+     display: none;
+   }
+   .main-web-content{
+     width: 93%;
+   }
+   
+ }

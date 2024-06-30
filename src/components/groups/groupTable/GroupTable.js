@@ -11,7 +11,6 @@ import {
   Space,
   Avatar,
 } from 'antd'
-import axios from 'axios'
 import { useLocation } from 'react-router-dom'
 import {
   EditOutlined,
@@ -24,11 +23,12 @@ import {
 import { MdGroups3 } from 'react-icons/md'
 
 import ACCESS_TOKEN from '../../../api/Api'
-
+import useApi from '../../../api/Api';
 const { Option } = Select
 
 const GroupTable = () => {
   const [data, setData] = useState([])
+  const Api = useApi()
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(false)
   const [pagination, setPagination] = useState({
@@ -43,17 +43,17 @@ const GroupTable = () => {
   const [form] = Form.useForm()
   const [createForm] = Form.useForm()
   const location = useLocation()
-
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+  }
   const fetchData = async (params = {}) => {
     setLoading(true)
     try {
-      const response = await axios.get(
+      const response = await Api.get(
         'http://localhost:9000/api/v1/groups/admin/get-all-groups',
         {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${ACCESS_TOKEN}`,
-          },
+          headers,
           params: {
             size: pagination.pageSize,
             page: pagination.current,
@@ -75,13 +75,10 @@ const GroupTable = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get(
+      const response = await Api.get(
         'http://localhost:9000/api/v1/users/admin',
         {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${ACCESS_TOKEN}`,
-          },
+          headers,
         }
       )
 
@@ -128,17 +125,14 @@ const GroupTable = () => {
         isPublic: values.isPublic === 'true',
         isAcceptAllRequest: values.isAcceptAllRequest === 'true',
       }
-      await axios.put(
+      await Api.put(
         `http://localhost:9000/api/v1/groups/admin/update-group`,
         {
           groupId: editingGroup.id,
           ...transformedValues,
         },
         {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${ACCESS_TOKEN}`,
-          },
+          headers,
         }
       )
       message.success('Cập nhật nhóm thành công!')
@@ -153,13 +147,10 @@ const GroupTable = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(
+      await Api.delete(
         `http://localhost:9000/api/v1/groups/admin/delete-group/${id}`,
         {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${ACCESS_TOKEN}`,
-          },
+          headers,
         }
       )
       message.success('Xóa nhóm thành công!')
@@ -179,14 +170,11 @@ const GroupTable = () => {
         isPublic: values.isPublic === 'true',
         isAcceptAllRequest: values.isAcceptAllRequest === 'true',
       }
-      await axios.post(
+      await Api.post(
         `http://localhost:9000/api/v1/groups/admin/create-group`,
         transformedValues,
         {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${ACCESS_TOKEN}`,
-          },
+          headers,
         }
       )
       message.success('Tạo nhóm thành công!')
