@@ -16,6 +16,7 @@ import {
   InfoCircleOutlined,
   RetweetOutlined,
   UserAddOutlined,
+  DeleteOutlined,
 } from '@ant-design/icons'
 import useApi from '../../../../api/Api'
 import './AreaTable.scss'
@@ -197,7 +198,7 @@ const AreaTable = ({ group }) => {
               render: (text, record) => (
                 <>
                   <Button
-                    icon={<InfoCircleOutlined />}
+                    icon={<DeleteOutlined />}
                     onClick={() => showDeleteModal(record)}
                   >
                     Xóa thành viên

@@ -7,7 +7,7 @@ import 'react-date-range/dist/theme/default.css' // theme css file
 import { addDays } from 'date-fns'
 import { DateRange } from 'react-date-range'
 
-const AreaTop = () => {
+const AreaTop = ({ classDetail }) => {
   const { openSidebar } = useContext(SidebarContext)
 
   const [state, setState] = useState([
@@ -48,9 +48,9 @@ const AreaTop = () => {
         >
           <MdOutlineMenu size={24} />
         </button>
-        <h2 className="area-top-title">Dashboard</h2>
+        <h2 className="area-top-title">{classDetail?.name}</h2>
       </div>
-      <div className="area-top-r">
+      {/* <div className="area-top-r">
         <div
           ref={dateRangeRef}
           className={`date-range-wrapper ${
@@ -70,7 +70,7 @@ const AreaTop = () => {
             showMonthAndYearPickers={false}
           />
         </div>
-      </div>
+      </div> */}
     </section>
   )
 }

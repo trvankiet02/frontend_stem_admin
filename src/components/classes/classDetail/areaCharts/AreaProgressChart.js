@@ -1,61 +1,61 @@
-const data = [
-  {
-    id: 1,
-    name: "Jeans",
-    percentValues: 70,
-  },
-  {
-    id: 2,
-    name: "Shirts",
-    percentValues: 40,
-  },
-  {
-    id: 3,
-    name: "Belts",
-    percentValues: 60,
-  },
-  {
-    id: 4,
-    name: "Caps",
-    percentValues: 80,
-  },
-  {
-    id: 5,
-    name: "Others",
-    percentValues: 20,
-  },
-];
+import React, { useEffect, useState } from 'react'
+import useApi from '../../../../api/Api'
+const AreaProgressChart = ({ classDetail }) => {
+  const Api = useApi()
+  const [data, setData] = useState([])
+  const headers = {
+    'Content-Type': 'application/json',
+    Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+  }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await Api.get(
+          `http://localhost:9000/api/v1/exams/admin/top-5`,
+          {
+            headers,
+          }
+        )
+        setData(response.data.result)
+        console.log(response.data.result)
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+    fetchData()
+  }, [classDetail.id])
 
-const AreaProgressChart = () => {
   return (
-    <div className="progress-bar">
-      <div className="progress-bar-info">
-        <h4 className="progress-bar-title">Most Sold Items</h4>
-      </div>
-      <div className="progress-bar-list">
-        {data?.map((progressbar) => {
-          return (
-            <div className="progress-bar-item" key={progressbar.id}>
-              <div className="bar-item-info">
-                <p className="bar-item-info-name">{progressbar.name}</p>
-                <p className="bar-item-info-value">
-                  {progressbar.percentValues}
-                </p>
+    <>
+      <div className="progress-bar">
+        <div className="progress-bar-info">
+          <h4 className="progress-bar-title">Bài kiểm tra nổi bật</h4>
+        </div>
+        <div className="progress-bar-list">
+          {data?.map((item) => {
+            return (
+              <div className="progress-bar-item" key={item?.exam?.id}>
+                <div className="bar-item-info">
+                  <p className="bar-item-info-name">{item?.exam.name}</p>
+                  <p className="bar-item-info-value">
+                    {item?.count} lượt tham gia
+                  </p>
+                </div>
+                <div className="bar-item-full">
+                  <div
+                    className="bar-item-filled"
+                    style={{
+                      width: `0%`,
+                    }}
+                  ></div>
+                </div>
               </div>
-              <div className="bar-item-full">
-                <div
-                  className="bar-item-filled"
-                  style={{
-                    width: `${progressbar.percentValues}%`,
-                  }}
-                ></div>
-              </div>
-            </div>
-          );
-        })}
+            )
+          })}
+        </div>
       </div>
-    </div>
-  );
-};
+    </>
+  )
+}
 
-export default AreaProgressChart;
+export default AreaProgressChart
