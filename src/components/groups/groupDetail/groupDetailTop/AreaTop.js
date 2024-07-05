@@ -1,13 +1,13 @@
 import { MdOutlineMenu } from 'react-icons/md'
-import './GroupTop.scss'
+import './AreaTop.scss'
 import { useContext, useEffect, useRef, useState } from 'react'
-import { SidebarContext } from '../../../context/SidebarContext'
+import { SidebarContext } from '../../../../context/SidebarContext'
 import 'react-date-range/dist/styles.css' // main style file
 import 'react-date-range/dist/theme/default.css' // theme css file
 import { addDays } from 'date-fns'
 import { DateRange } from 'react-date-range'
 
-const GroupTop = () => {
+const AreaTop = ({ group }) => {
   const { openSidebar } = useContext(SidebarContext)
 
   // const [state, setState] = useState([
@@ -55,7 +55,7 @@ const GroupTop = () => {
         >
           <MdOutlineMenu size={24} />
         </button>
-        <h2 className="area-top-title">Quản lý nhóm</h2>
+        <h2 className="area-top-title">{group?.name}</h2>
       </div>
       <div className="area-top-r">
         <div
@@ -78,4 +78,4 @@ const GroupTop = () => {
   )
 }
 
-export default GroupTop
+export default AreaTop

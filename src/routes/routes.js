@@ -2,8 +2,9 @@ import DashBoard from '../components/dashboard/DashBoard'
 import PageNotFound from '../components/pageNotFound/PageNotFound'
 import Users from '../components/users/Users'
 import Groups from '../components/groups/Groups'
-import GroupMembers from '../components/groupMemers/GroupMembers'
+import GroupDetail from '../components/groups/groupDetail/GroupDetail'
 import Classes from '../components/classes/Classes'
+import ClassDetail from '../components/classes/classDetail/ClassDetail'
 import Reports from '../components/reports/Reports'
 import Login from '../components/login/Login'
 
@@ -12,9 +13,10 @@ const privateRoutes = [
   { path: '*', element: <PageNotFound /> },
   { path: '/users', element: <Users /> },
   { path: '/groups', element: <Groups /> },
+  { path: '/groups/:uuid', element: <GroupDetail /> },
   { path: '/classes', element: <Classes /> },
-  { path: '/group-members/:uuid', element: <GroupMembers /> },
+  { path: '/classes/:uuid', element: <ClassDetail /> },
   { path: '/reports', element: <Reports /> },
 ]
 const authRoutes = [{ path: '/login', element: <Login /> }]
-export { privateRoutes, authRoutes}
+export { privateRoutes, authRoutes }

@@ -1,26 +1,19 @@
 import { MdOutlineMenu } from 'react-icons/md'
-import './GroupTop.scss'
+import './AreaTop.scss'
 import { useContext, useEffect, useRef, useState } from 'react'
-import { SidebarContext } from '../../../context/SidebarContext'
+import { SidebarContext } from '../../../../context/SidebarContext'
 import 'react-date-range/dist/styles.css' // main style file
 import 'react-date-range/dist/theme/default.css' // theme css file
 import { addDays } from 'date-fns'
 import { DateRange } from 'react-date-range'
 
-const GroupTop = () => {
+const AreaTop = () => {
   const { openSidebar } = useContext(SidebarContext)
 
-  // const [state, setState] = useState([
-  //   {
-  //     startDate: new Date(),
-  //     endDate: addDays(new Date(), 7),
-  //     key: 'selection',
-  //   },
-  // ])
   const [state, setState] = useState([
     {
       startDate: new Date(),
-      endDate: new Date(),
+      endDate: addDays(new Date(), 7),
       key: 'selection',
     },
   ])
@@ -55,7 +48,7 @@ const GroupTop = () => {
         >
           <MdOutlineMenu size={24} />
         </button>
-        <h2 className="area-top-title">Quản lý nhóm</h2>
+        <h2 className="area-top-title">Dashboard</h2>
       </div>
       <div className="area-top-r">
         <div
@@ -65,17 +58,21 @@ const GroupTop = () => {
           }`}
           onClick={handleInputClick}
         >
-          {/* <DateRange
+          <DateRange
             editableDateInputs={true}
-            onChange={(item) => setState([item.selection])}
+            onChange={(item) => {
+              setState([item.selection])
+              console.log(state[0]?.startDate.getTime())
+              console.log(state[0]?.endDate.getTime())
+            }}
             moveRangeOnFirstSelection={false}
             ranges={state}
             showMonthAndYearPickers={false}
-          /> */}
+          />
         </div>
       </div>
     </section>
   )
 }
 
-export default GroupTop
+export default AreaTop

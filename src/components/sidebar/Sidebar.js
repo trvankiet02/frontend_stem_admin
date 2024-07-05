@@ -14,11 +14,9 @@ import {
   MdPeopleOutline,
   MdOutlineReportGmailerrorred,
 } from 'react-icons/md'
-import { Link, useLocation,useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import './Sidebar.scss'
 import { SidebarContext } from '../../context/SidebarContext'
-import { GoldOutlined } from '@ant-design/icons'
-
 
 const Sidebar = () => {
   const { theme } = useContext(ThemeContext)
@@ -62,11 +60,6 @@ const Sidebar = () => {
       icon: <MdSynagogue size={20} />,
     },
     {
-      title: 'Quản lý thành viên',
-      ref: '/group-members/:uuid',
-      icon: <MdPeopleOutline size={20} />,
-    },
-    {
       title: 'Quản lý vi phạm',
       ref: '/reports',
       icon: <MdOutlineReportGmailerrorred size={20} />,
@@ -75,18 +68,17 @@ const Sidebar = () => {
 
   const isActive = (ref) => {
     if (location.pathname === ref) return true
-    if (
-      ref === '/group-members/:uuid' &&
-      location.pathname.startsWith('/group-members/')
-    ) {
+    if (ref === '/groups' && location.pathname.startsWith('/groups/')) {
+      return true
+    }
+    if (ref === '/classes' && location.pathname.startsWith('/classes/')) {
       return true
     }
     return false
   }
   const LogOut = () => {
-    localStorage.clear();
-    navigate('/login');
-
+    localStorage.clear()
+    navigate('/login')
   }
 
   return (
@@ -196,8 +188,8 @@ const Sidebar = () => {
                 <span className="menu-link-text">Settings</span>
               </Link>
             </li>
-            <li className="menu-item" onClick={()=>LogOut()}>
-              <Link className="menu-link" >
+            <li className="menu-item" onClick={() => LogOut()}>
+              <Link className="menu-link">
                 <span className="menu-link-icon">
                   <MdOutlineLogout size={20} />
                 </span>

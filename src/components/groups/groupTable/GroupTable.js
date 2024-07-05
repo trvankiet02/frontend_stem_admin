@@ -11,7 +11,7 @@ import {
   Space,
   Avatar,
 } from 'antd'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import {
   EditOutlined,
   UserOutlined,
@@ -23,7 +23,7 @@ import {
 import { MdGroups3 } from 'react-icons/md'
 
 import ACCESS_TOKEN from '../../../api/Api'
-import useApi from '../../../api/Api';
+import useApi from '../../../api/Api'
 const { Option } = Select
 
 const GroupTable = () => {
@@ -43,6 +43,7 @@ const GroupTable = () => {
   const [form] = Form.useForm()
   const [createForm] = Form.useForm()
   const location = useLocation()
+  const navigate = useNavigate()
   const headers = {
     'Content-Type': 'application/json',
     Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
@@ -188,6 +189,10 @@ const GroupTable = () => {
     }
   }
 
+  const handleClickOnRow = (record) => {
+    navigate(`/groups/${record.id}`)
+  }
+
   return (
     <>
       <Button
@@ -241,12 +246,18 @@ const GroupTable = () => {
                 <Space size="small">
                   <Button
                     type="primary"
-                    onClick={() => showModal(record)}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      showModal(record)
+                    }}
                     icon={<EditOutlined />}
                   />
                   <Button
                     type="primary"
-                    onClick={() => handleDelete(record.id)}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      handleDelete(record.id)
+                    }}
                     icon={<DeleteOutlined />}
                   />
                 </Space>
@@ -259,6 +270,11 @@ const GroupTable = () => {
         pagination={pagination}
         loading={loading}
         onChange={handleTableChange}
+        onRow={(record, index) => {
+          return {
+            onClick: (event) => handleClickOnRow(record),
+          }
+        }}
       />
       <Modal
         title="Cập nhật nhóm"
