@@ -1,11 +1,11 @@
-import AreaBarChart from "./AreaBarChart"
-import AreaProgressChart from "./AreaProgressChart"
+import AreaBarChart from './AreaBarChart'
+import AreaProgressChart from './AreaProgressChart'
 
-const AreaCharts = () => {
+const AreaCharts = ({ classDetail }) => {
   return (
     <section className="content-area-charts">
-      <AreaBarChart />
-      <AreaProgressChart />
+      <AreaBarChart classDetail={classDetail} />
+      <AreaProgressChart classDetail={classDetail} />
     </section>
   )
 }
