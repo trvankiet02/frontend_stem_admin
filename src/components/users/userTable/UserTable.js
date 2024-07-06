@@ -11,7 +11,7 @@ import {
   InfoCircleOutlined,
   RetweetOutlined,
 } from '@ant-design/icons'
-import useApi from '../../../api/Api';
+import useApi from '../../../api/Api'
 
 const UserTable = () => {
   const Api = useApi()
@@ -147,7 +147,7 @@ const UserTable = () => {
             ),
           },
         ]}
-        rowKey={(record) => record.id}
+        rowKey={(record, index) => record.id + index}
         dataSource={data}
         pagination={pagination}
         loading={loading}
