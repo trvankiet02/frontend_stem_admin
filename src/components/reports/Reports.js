@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
-import { Layout, Content } from 'antd'
+import { Layout } from 'antd'
 import ReportTop from './reportTop/ReportTop'
 import ReportTable from './reportTable/ReportTable'
+const { Header, Content } = Layout
 const Reports = () => {
   useEffect(() => {
     const isLogin = localStorage.getItem('accessToken')
