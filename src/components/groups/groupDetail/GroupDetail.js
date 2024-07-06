@@ -7,7 +7,7 @@ import AreaCards from './groupDetailCard/AreaCards'
 import AreaCharts from './groupDetailChart/AreaCharts'
 import AreaTable from './groupDetailTable/AreaTable'
 import AreaTop from './groupDetailTop/AreaTop'
-
+import { Navigate } from 'react-router-dom'
 import PageNotFound from '../../pageNotFound/PageNotFound'
 
 const GroupDetail = () => {
@@ -15,6 +15,13 @@ const GroupDetail = () => {
   const [group, setGroup] = useState(null)
   const [loading, setLoading] = useState(true)
   const Api = useApi()
+
+  useEffect(() => {
+    const isLogin = localStorage.getItem('accessToken')
+    if (!isLogin) {
+      <Navigate to="/login" />
+    }
+  }, [])
   const headers = {
     'Content-Type': 'application/json',
     Authorization: 'Bearer ' + localStorage.getItem('accessToken'),

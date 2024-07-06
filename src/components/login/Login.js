@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { Button, Form, Input, message } from 'antd'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import axios from 'axios'
@@ -31,6 +32,15 @@ function Login() {
       .then((response) => {
         // Xử lý kết quả sau khi gửi thành công
         if (response.data.statusCode === 200) {
+          const {
+            accessToken,
+            refreshToken,
+            id,
+            first_name,
+            last_name,
+            avatar_url,
+            role,
+          } = response.data.result
           localStorage.setItem('accessToken', response.data.result.accessToken)
           localStorage.setItem(
             'refreshToken',
@@ -51,9 +61,11 @@ function Login() {
                   JSON.stringify(response.data.result)
                 )
 
-                setTimeout(() => {
+                if (response.data.result.role === 'ADMIN') {
                   navigate('/')
-                }, 2000)
+                } else {
+                  toast.error('Bạn không có quyền truy cập vào trang này')
+                }
               } else {
                 message.error(response.data.message)
               }
@@ -89,12 +101,6 @@ function Login() {
       .finally(() => {
         setLoading(false)
       })
-
-    // TEST
-    // localStorage.setItem('accessToken', 'response.data.result.accessToken')
-    // localStorage.setItem('refreshToken', 'response.data.result.refreshToken')
-    // localStorage.setItem('login', true)
-    // navigate('/')
   }
 
   const onFinishFailed = (errorInfo) => {

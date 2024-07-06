@@ -1,11 +1,16 @@
-import React from 'react'
-import { Layout } from 'antd'
-import ReportTable from './reportTable/ReportTable'
+import React, { useEffect } from 'react'
+import { Navigate } from 'react-router-dom'
+import { Layout, Content } from 'antd'
 import ReportTop from './reportTop/ReportTop'
-
-const { Header, Content } = Layout
-
+import ReportTable from './reportTable/ReportTable'
 const Reports = () => {
+  useEffect(() => {
+    const isLogin = localStorage.getItem('accessToken')
+    if (!isLogin) {
+      ;<Navigate to="/login" />
+    }
+  }, [])
+
   return (
     <>
       <ReportTop />

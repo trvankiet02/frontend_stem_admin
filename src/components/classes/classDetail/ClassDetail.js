@@ -7,14 +7,21 @@ import AreaCards from './areaCards/AreaCards'
 import AreaCharts from './areaCharts/AreaCharts'
 import AreaTable from './areaTable/AreaTable'
 import AreaTop from './areaTop/AreaTop'
-
 import PageNotFound from '../../pageNotFound/PageNotFound'
-
+import { Navigate } from 'react-router-dom'
 const ClassDetail = () => {
+
+
   const { uuid: classId } = useParams()
   const [classDetail, setClassDetail] = useState(null)
   const [loading, setLoading] = useState(true)
   const Api = useApi()
+  useEffect(() => {
+    const isLogin = localStorage.getItem('accessToken')
+    if (!isLogin) {
+      <Navigate to="/login" />
+    }
+  }, [])
   const headers = {
     'Content-Type': 'application/json',
     Authorization: 'Bearer ' + localStorage.getItem('accessToken'),

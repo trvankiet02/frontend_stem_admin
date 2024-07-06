@@ -8,9 +8,11 @@ import { SidebarProvider } from "./context/SidebarContext.js";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ThemeProvider>
+   
     <SidebarProvider>
       <App />
     </SidebarProvider>
+    
   </ThemeProvider>
 );
 
