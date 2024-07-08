@@ -198,6 +198,7 @@ const AreaTable = ({ classDetail }) => {
               render: (text, record) => (
                 <>
                   <Button
+                    danger
                     icon={<DeleteOutlined />}
                     onClick={() => showDeleteModal(record)}
                   >

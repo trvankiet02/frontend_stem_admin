@@ -245,7 +245,6 @@ const GroupTable = () => {
               <>
                 <Space size="small">
                   <Button
-                    type="primary"
                     onClick={(e) => {
                       e.stopPropagation()
                       showModal(record)
@@ -253,7 +252,7 @@ const GroupTable = () => {
                     icon={<EditOutlined />}
                   />
                   <Button
-                    type="primary"
+                    danger
                     onClick={(e) => {
                       e.stopPropagation()
                       handleDelete(record.id)

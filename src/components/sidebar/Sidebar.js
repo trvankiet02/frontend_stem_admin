@@ -11,8 +11,8 @@ import {
   MdSynagogue,
   MdOutlineSettings,
   MdGroups3,
-  MdPeopleOutline,
   MdOutlineReportGmailerrorred,
+  MdCameraOutdoor,
 } from 'react-icons/md'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import './Sidebar.scss'
@@ -58,6 +58,11 @@ const Sidebar = () => {
       title: 'Quản lý lớp',
       ref: '/classes',
       icon: <MdSynagogue size={20} />,
+    },
+    {
+      title: 'Quản lý địa chỉ',
+      ref: '/addresses',
+      icon: <MdCameraOutdoor size={20} />,
     },
     {
       title: 'Quản lý vi phạm',
@@ -180,14 +185,14 @@ const Sidebar = () => {
 
         <div className="sidebar-menu sidebar-menu2">
           <ul className="menu-list">
-            <li className="menu-item">
+            {/* <li className="menu-item">
               <Link to="/" className="menu-link">
                 <span className="menu-link-icon">
                   <MdOutlineSettings size={20} />
                 </span>
                 <span className="menu-link-text">Settings</span>
               </Link>
-            </li>
+            </li> */}
             <li className="menu-item" onClick={() => LogOut()}>
               <Link className="menu-link">
                 <span className="menu-link-icon">

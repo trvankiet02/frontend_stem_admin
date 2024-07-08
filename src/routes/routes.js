@@ -7,6 +7,7 @@ import Classes from '../components/classes/Classes'
 import ClassDetail from '../components/classes/classDetail/ClassDetail'
 import Reports from '../components/reports/Reports'
 import Login from '../components/login/Login'
+import AddressManagement from '../components/addresses/Addresses'
 
 const privateRoutes = [
   { path: '/', element: <DashBoard /> },
@@ -17,6 +18,7 @@ const privateRoutes = [
   { path: '/classes', element: <Classes /> },
   { path: '/classes/:uuid', element: <ClassDetail /> },
   { path: '/reports', element: <Reports /> },
+  { path: '/addresses', element: <AddressManagement /> },
 ]
 const authRoutes = [{ path: '/login', element: <Login /> }]
 export { privateRoutes, authRoutes }
