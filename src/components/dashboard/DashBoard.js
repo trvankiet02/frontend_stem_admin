@@ -2,8 +2,16 @@ import AreaCards from '../dashboard/areaCards/AreaCards'
 import AreaCharts from '../dashboard/areaCharts/AreaCharts'
 import AreaTable from '../dashboard/areaTable/AreaTable'
 import AreaTop from '../dashboard/areaTop/AreaTop'
+import { Navigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 const Dashboard = () => {
+  useEffect(() => {
+    const isLogin = localStorage.getItem('accessToken')
+    if (!isLogin) {
+      ;<Navigate to="/login" />
+    }
+  }, [])
   return (
     <div className="content-area">
       {/* <AreaTop /> */}

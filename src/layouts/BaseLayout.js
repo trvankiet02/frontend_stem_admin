@@ -1,5 +1,6 @@
-import { Outlet } from "react-router-dom";
-import Sidebar from "../components/sidebar/Sidebar";
+import { Outlet, Navigate } from 'react-router-dom'
+import Sidebar from '../components/sidebar/Sidebar'
+import { useEffect } from 'react'
 
 const BaseLayout = () => {
   return (
@@ -11,7 +12,7 @@ const BaseLayout = () => {
         <Outlet />
       </div>
     </main>
-  );
-};
+  )
+}
 
-export default BaseLayout;
+export default BaseLayout
