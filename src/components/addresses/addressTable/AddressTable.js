@@ -40,7 +40,7 @@ const AddressManagement = () => {
       })
     } catch (error) {
       console.error('Error fetching provinces:', error)
-      message.error('Failed to fetch provinces.')
+      message.error('Xảy ra sự cố khi lấy thông tin các tỉnh')
     }
     setLoading(false)
   }
@@ -59,7 +59,7 @@ const AddressManagement = () => {
       })
     } catch (error) {
       console.error('Error fetching districts:', error)
-      message.error('Failed to fetch districts.')
+      message.error('Xảy ra sự cố khi lấy thông tin các quận/huyện')
     }
     setLoading(false)
   }
@@ -78,7 +78,7 @@ const AddressManagement = () => {
       })
     } catch (error) {
       console.error('Error fetching schools:', error)
-      message.error('Failed to fetch schools.')
+      message.error('Xảy ra sự cố khi lấy thông tin các trường học')
     }
     setLoading(false)
   }
@@ -126,12 +126,14 @@ const AddressManagement = () => {
       if (id) {
         await Api.put(`/api/v1/addresses/admin/${type}s/${id}`, values)
         message.success(
-          `${type.charAt(0).toUpperCase() + type.slice(1)} updated successfully`
+          // `${type.charAt(0).toUpperCase() + type.slice(1)} Cập nhật thành công`
+          `Cập nhật thành công`
         )
       } else {
         await Api.post(`/api/v1/addresses/admin/${type}s`, values)
         message.success(
-          `${type.charAt(0).toUpperCase() + type.slice(1)} created successfully`
+          // `${type.charAt(0).toUpperCase() + type.slice(1)} created successfully`
+          `Thêm mới thành công`
         )
       }
       if (type === 'province') fetchProvinces()
@@ -140,7 +142,8 @@ const AddressManagement = () => {
       handleCancel()
     } catch (error) {
       console.error(`Error saving ${type}:`, error)
-      message.error(`Failed to save ${type}.`)
+      // message.error(`Failed to save ${type}.`)
+      message.error(`Xảy ra sự cố khi lưu thông tin`)
     }
     setLoading(false)
   }
@@ -150,14 +153,18 @@ const AddressManagement = () => {
     try {
       await Api.delete(`/api/v1/addresses/admin/${type}s/${id}`)
       message.success(
-        `${type.charAt(0).toUpperCase() + type.slice(1)} deleted successfully`
+        // `${type.charAt(0).toUpperCase() + type.slice(1)} deleted successfully`
+        `Xóa thành công`
       )
       if (type === 'province') fetchProvinces()
       else if (type === 'district') fetchDistricts(selectedProvince.id)
       else if (type === 'school') fetchSchools(selectedDistrict.id)
     } catch (error) {
-      console.error(`Error deleting ${type}:`, error)
-      message.error(`Failed to delete ${type}.`)
+      console.error(
+        `Error deleting ${type}:`,
+        error
+      )// message.error(`Failed to delete ${type}.`)
+      `Xóa thất bại`
     }
     setLoading(false)
   }

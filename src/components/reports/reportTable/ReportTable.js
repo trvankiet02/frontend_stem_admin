@@ -47,7 +47,7 @@ const ReportTable = () => {
       setGroups(response.data.result)
     } catch (error) {
       console.error('Error fetching groups:', error)
-      message.error('Failed to fetch groups.')
+      message.error('Xảy ra lỗi khi lấy thông tin nhóm/lớp')
     }
   }
 
@@ -69,7 +69,7 @@ const ReportTable = () => {
       })
     } catch (error) {
       console.error('Error fetching reports:', error)
-      message.error('Failed to fetch reports.')
+      message.error('Xảy ra lỗi khi lấy thông tin các báo cáo')
     }
     setLoading(false)
   }
@@ -103,7 +103,7 @@ const ReportTable = () => {
       setIsModalVisible(true)
     } catch (error) {
       console.error('Error fetching post content:', error)
-      message.error('Failed to fetch post content.')
+      message.error('Xảy ra lỗi khi lấy nội dung bài viết')
     }
   }
 
