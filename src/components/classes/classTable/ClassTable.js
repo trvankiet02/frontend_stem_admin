@@ -34,7 +34,7 @@ const GroupTable = () => {
   const [loading, setLoading] = useState(false)
   const [pagination, setPagination] = useState({
     current: 1,
-    pageSize: 10,
+    pageSize: 5,
     total: 0,
   })
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -45,6 +45,26 @@ const GroupTable = () => {
   const [createForm] = Form.useForm()
   const location = useLocation()
   const navigate = useNavigate()
+
+  const subjects = [
+    'Toán học',
+    'Tiếng việt',
+    'Tiếng anh',
+    'Sinh học',
+    'Hóa học',
+    'Vật lý',
+    'Tự nhiên & xã hội',
+    'Giáo dục công dân',
+    'Đạo đức',
+    'Lịch sử',
+    'Địa lý',
+    'Tin học',
+    'Giáo dục thể chất',
+    'Mĩ thuật',
+    'Khoa học',
+    'Công nghệ',
+    'Giáo dục quốc phòng',
+  ]
   const headers = {
     'Content-Type': 'application/json',
     Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
@@ -387,7 +407,11 @@ const GroupTable = () => {
             </Select>
           </Form.Item>
           <Form.Item name="subject" label="Môn học">
-            <Input placeholder="Môn học" />
+            <Select placeholder="Chọn môn học">
+              {subjects.map((subject) => (
+                <Option value={subject}>{subject}</Option>
+              ))}
+            </Select>
           </Form.Item>
         </Form>
       </Modal>

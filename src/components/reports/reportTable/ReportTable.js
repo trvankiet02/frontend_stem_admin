@@ -24,7 +24,7 @@ const ReportTable = () => {
   const [selectedGroup, setSelectedGroup] = useState(null)
   const [pagination, setPagination] = useState({
     current: 1,
-    pageSize: 10,
+    pageSize: 5,
     total: 0,
   })
   const [postContent, setPostContent] = useState('')
@@ -52,7 +52,7 @@ const ReportTable = () => {
   }
 
   // Fetch reports based on selected group
-  const fetchReports = async (groupId, page = 1, pageSize = 10) => {
+  const fetchReports = async (groupId, page = 1, pageSize = 5) => {
     setLoading(true)
     try {
       const response = await Api.get(

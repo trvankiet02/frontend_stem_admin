@@ -29,7 +29,7 @@ const AreaTable = ({ classDetail }) => {
   const [users, setUsers] = useState([])
   const [pagination, setPagination] = useState({
     current: 1,
-    pageSize: 10,
+    pageSize: 5,
     total: 0,
   })
 
@@ -141,7 +141,9 @@ const AreaTable = ({ classDetail }) => {
       fetchData()
     } catch (error) {
       console.error('Error adding member:', error)
-      message.error('Thêm thành viên thất bại!')
+      message.error(
+        `Thêm thành viên thất bại! Vì ${error?.response?.data?.message}`
+      )
     }
   }
 

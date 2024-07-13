@@ -19,7 +19,7 @@ const UserTable = () => {
   const [loading, setLoading] = useState(false)
   const [pagination, setPagination] = useState({
     current: 1,
-    pageSize: 10,
+    pageSize: 5,
     total: 0,
   })
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -125,6 +125,14 @@ const UserTable = () => {
             title: 'Vai trò',
             dataIndex: 'role',
             key: 'role',
+            render: (role) =>
+              role === 'TEACHER'
+                ? 'Giáo viên'
+                : role === 'PARENT'
+                ? 'Phụ huynh'
+                : role === 'STUDENT'
+                ? 'Học sinh'
+                : 'Quản trị viên',
           },
           {
             title: 'Hành động',
@@ -222,7 +230,9 @@ const UserTable = () => {
                 dataSource={editingUser.parents}
               />
             </Form.Item>
-          ) : null}
+          ) : (
+            <p>Không có danh sách phụ huynh liên kết</p>
+          )}
           {editingUser?.children ? (
             <Form.Item
               name="children"
@@ -284,7 +294,9 @@ const UserTable = () => {
                 dataSource={editingUser.children}
               />
             </Form.Item>
-          ) : null}
+          ) : (
+            <p>Không có danh sách học sinh được liên kết</p>
+          )}
         </Form>
       </Modal>
     </>
