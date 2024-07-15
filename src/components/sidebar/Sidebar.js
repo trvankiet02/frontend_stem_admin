@@ -43,7 +43,7 @@ const Sidebar = () => {
   }, [])
 
   const sidebarOptions = [
-    { title: 'Dashboard', ref: '/', icon: <MdOutlineGridView size={18} /> },
+    { title: 'Trang chủ', ref: '/', icon: <MdOutlineGridView size={18} /> },
     {
       title: 'Quản lý người dùng',
       ref: '/users',
@@ -94,7 +94,7 @@ const Sidebar = () => {
       <div className="sidebar-top">
         <div className="sidebar-brand">
           <img src={theme === LIGHT_THEME ? LogoBlue : LogoWhite} alt="" />
-          <span className="sidebar-brand-text">STEM MANAGEMENT</span>
+          <span className="sidebar-brand-text">MANAGEMENT</span>
         </div>
         <button className="sidebar-close-btn" onClick={closeSidebar}>
           <MdOutlineClose size={24} />

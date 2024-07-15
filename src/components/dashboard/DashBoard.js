@@ -4,6 +4,7 @@ import AreaTable from '../dashboard/areaTable/AreaTable'
 import AreaTop from '../dashboard/areaTop/AreaTop'
 import { Navigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import coverPic from '../../assets/images/cover.jpg'
 import useApi from '../../api/Api'
 
 const Dashboard = () => {
@@ -54,15 +55,8 @@ const Dashboard = () => {
       {/* <AreaCards />
       <AreaCharts />
       <AreaTable /> */}
-      <h1>Trang quản lý hệ thống mạng xã hội học tập STEM</h1>
-      <img
-        src={
-          'https://res.cloudinary.com/djzwxw0ao/image/upload/v1696942528/uqbxidtwcdbqn8glt6we.jpg'
-        }
-        alt={'avtStem'}
-        width="100%"
-        height="100%"
-      />
+      <h1>Trang quản lý hệ thống mạng xã hội học tập</h1>
+      <img src={coverPic} alt={'avtStem'} width="80%" height="80%" />
     </div>
   )
 }
