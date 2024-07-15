@@ -34,7 +34,7 @@ const AreaBarChart = ({ classDetail }) => {
       <img
         src={
           classDetail?.coverUrl
-            ? classDetail?.coverUr
+            ? classDetail?.coverUrl
             : 'https://res.cloudinary.com/djzwxw0ao/image/upload/v1696942528/uqbxidtwcdbqn8glt6we.jpg'
         }
         alt={classDetail?.name}
